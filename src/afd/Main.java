@@ -126,7 +126,6 @@ public class Main {
 	}
 	
 	private static void D() {
-		
 		for (int i = 0; i < q.length; i++) {
 			
 			for (int l = 0; l < q.length; l++) {
