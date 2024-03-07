@@ -11,20 +11,36 @@ public class Main {
 	
 	public static void main(String[] args) {
 		setup();
+		boolean continuar = true;
 		
-		System.out.println("Insira uma cadeia formada pelos símbolos que você escolheu como parte do alfabeto do automato A: ");
-		String cadeia = scan.nextLine();
-		Estado estadoAtual = q[0];
-		
-		for (int i = 0; i < cadeia.length(); i++) {
-			estadoAtual = estadoAtual.transicionar(cadeia.charAt(i));
+		while (continuar) {
+			System.out.println("Insira uma cadeia formada pelos símbolos que você escolheu como parte do alfabeto do automato A: ");
+			String cadeia = scan.nextLine();
+			Estado estadoAtual = q[0];
+			
+			System.out.print("->");
+			for (int i = 0; i < cadeia.length(); i++) {
+				System.out.print(estadoAtual.getNome() + " ");
+				estadoAtual = estadoAtual.transicionar(cadeia.charAt(i));
+			}
+			
+			System.out.println(estadoAtual.getNome());
+			
+			if (estadoAtual.isEnd()) {
+				System.out.println();
+				System.out.println("Cadeia Aceita!!!");
+			} else {
+				System.out.println();
+				System.out.println("Cadeia Negada");
+			}
+			
+			System.out.println("Você deseja inserir outra cadeia? S ou N");
+			char repete = scan.nextLine().charAt(0);
+			
+			continuar = repete == 'S' || repete == 's';
 		}
 		
-		if (estadoAtual.isEnd()) {
-			System.out.println("Cadeia Aceita!!!");
-		} else {
-			System.out.println("Cadeia Negada");
-		}
+		System.out.println("___Autômato Finalizado!___");
 	}
 	
 	public static void setup() {
@@ -126,6 +142,7 @@ public class Main {
 	}
 	
 	private static void D() {
+		
 		for (int i = 0; i < q.length; i++) {
 			
 			for (int l = 0; l < q.length; l++) {
